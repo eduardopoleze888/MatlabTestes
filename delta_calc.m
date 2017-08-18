@@ -53,22 +53,17 @@ for i=2:nt
     st_s(i) = int_tustin(vt_s(i), vt_s(i-1), st_s(i-1), dt);
     % Scan Time
     if mod(ti, Tr) == 0
-        if jt_s(i) == 0
-            ts1 = -vt_s(i)/at_s(i);
-            ts2 = ts1;
+        [delta, ts1, ts2, grau, cx]  = pol2roots(1/2*jt_s(i), at_s(i), vt_s(i));
+        if grau == 1
             ps1 = st_s(i) + vt_s(i)*ts1 + 1/2*at_s(i)*ts1^2;
-            ps2 = ps1;
             ps1_v = [ps1_v ps1];
             ps2_v = [ps2_v ps2];
             tps = [tps ti];
         else
-            delta = at_s(i)^2 - 2*vt_s(i)*jt_s(i);
-            if delta >= 0
-                ts1 = (-at_s(i) + sqrt(delta))/jt_s(i);
-                ps1 = st_s(i) + vt_s(i)*ts1 + (1/2)*at_s(i)*ts1^2 + (1/6)*jt_s(i)*ts1^3
+            if cx == 0
+                ps1 = p3((1/6)*jt_s(i), (1/2)*at_s(i), vt_s(i), st_s(i), ts1);
                 ps1_v = [ps1_v ps1];
-                ts2 = (-at_s(i) - sqrt(delta))/jt_s(i);
-                ps2 = st_s(i) + vt_s(i)*ts2 + (1/2)*at_s(i)*ts2^2 + (1/6)*jt_s(i)*ts2^3
+                ps2 = p3((1/6)*jt_s(i), (1/2)*at_s(i), vt_s(i), st_s(i), ts2);
                 ps2_v = [ps2_v ps2];
                 tps = [tps ti];
             end
