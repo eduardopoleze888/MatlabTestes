@@ -51,6 +51,7 @@ for i=2:nt
     at_s(i) = int_tustin(jt_s(i), jt_s(i-1), at_s(i-1), dt);
     vt_s(i) = int_tustin(at_s(i), at_s(i-1), vt_s(i-1), dt);
     st_s(i) = int_tustin(vt_s(i), vt_s(i-1), st_s(i-1), dt);
+    % Scan Time
     if mod(ti, Tr) == 0
         if jt_s(i) == 0
             ts1 = -vt_s(i)/at_s(i);
