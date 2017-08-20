@@ -1,6 +1,6 @@
 function [delta, t1, t2, grau, cx]  = pol2roots(a,b,c)
 %UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
+%   Detailed explanation goes here :)
 
 %% Grau 1
     if a == 0 
