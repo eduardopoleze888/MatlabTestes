@@ -13,6 +13,9 @@ function [delta, t1, t2, grau, cx]  = pol2roots(a,b,c)
     else
         grau = 2;
         delta = b^2 - 4*a*c;
+        if abs(delta) < 0.01
+            delta = 0;
+        end
         %% Raizes Complexas
         if delta < 0
             cx = 1;
