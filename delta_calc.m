@@ -22,17 +22,13 @@ s0 = 0;
 
 al = -(2*v0 + a0*ti1)/(ti2+ti3-ti1);
 
-
 j1 = (al-a0)/ti1;
 j2 = 0;
 j3 = -al/(ti3-ti2);
 
-
 jt_s = [j1*ones(n1,1); j2*ones(n2,1); j3*ones(nt-n1-n2,1)];
 jt_in.signals.values = [j1*ones(n1,1); j2*ones(n2,1); j3*ones(nt-n1-n2,1)];
 jt_in.time = t;
-
-
 
 st_s = zeros(nt,1);
 vt_s = zeros(nt,1);
@@ -55,15 +51,15 @@ for i=2:nt
     if mod(ti, Tr) == 0
         [delta, ts1, ts2, grau, cx]  = pol2roots(1/2*jt_s(i), at_s(i), vt_s(i));
         if grau == 1
-            ps1 = st_s(i) + vt_s(i)*ts1 + 1/2*at_s(i)*ts1^2;
+            ps1 = p23(0, 1/2*at_s(i), vt_s(i), st_s(i), ts1);
             ps1_v = [ps1_v ps1];
             ps2_v = [ps2_v ps2];
             tps = [tps ti];
         else
             if cx == 0
-                ps1 = p3((1/6)*jt_s(i), (1/2)*at_s(i), vt_s(i), st_s(i), ts1);
+                ps1 = p23((1/6)*jt_s(i), (1/2)*at_s(i), vt_s(i), st_s(i), ts1);
                 ps1_v = [ps1_v ps1];
-                ps2 = p3((1/6)*jt_s(i), (1/2)*at_s(i), vt_s(i), st_s(i), ts2);
+                ps2 = p23((1/6)*jt_s(i), (1/2)*at_s(i), vt_s(i), st_s(i), ts2);
                 ps2_v = [ps2_v ps2];
                 tps = [tps ti];
             end
