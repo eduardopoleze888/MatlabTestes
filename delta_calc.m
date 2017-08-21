@@ -13,8 +13,6 @@ nt = length(t);
 n1 = ti1/dt;
 n2 = (ti2-ti1)/dt;
 
-
-
 a0 = 0.1;
 v0 = 5;
 s0 = 15;
